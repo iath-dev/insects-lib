@@ -20,6 +20,7 @@ const nextConfig = {
 
     return config;
   },
+  crossOrigin: 'anonymous',
 };
 
 export default nextConfig;

@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import * as tf from '@tensorflow/tfjs';
+import json_model from '@/models/mobilenet_js_model/model.json';
 
 // Definir los tipos para el hook
 interface UseImageModelReturn {
@@ -10,7 +11,7 @@ interface UseImageModelReturn {
 }
 
 const useImageModel = (): UseImageModelReturn => {
-  const [model, setModel] = useState<tf.GraphModel | null>(null);
+  const [model, setModel] = useState<tf.LayersModel | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [prediction, setPrediction] = useState<number[] | null>(null);
@@ -20,9 +21,9 @@ const useImageModel = (): UseImageModelReturn => {
     const loadModel = async () => {
       try {
         setIsLoading(true);
-        const modelUrl = '/models/mobilenetv2/model.json'; // Ruta desde la carpeta public
-        console.log('Cargando modelo...', modelUrl)
-        const loadedModel = await tf.loadGraphModel(modelUrl);
+
+        console.log('Cargando modelo...', 'model.src')
+        const loadedModel = await tf.loadLayersModel('/models/mobilenetv2/model.json');
         console.log('Modelo cargado', loadedModel)
         setModel(loadedModel);
       } catch (err) {

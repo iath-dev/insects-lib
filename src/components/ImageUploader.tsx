@@ -7,14 +7,14 @@ interface ImageUploaderProps {
 }
 
 export const ImageUploader: React.FC<ImageUploaderProps> = ({ onChange }) => {
-    const [selectedImage, setSelectedImage] = useState<any>(null)
+    const [selectedImage, setSelectedImage] = useState<string | null>(null)
     
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
           const reader = new FileReader();
           reader.onload = (event: ProgressEvent<FileReader>) => {
-            setSelectedImage(event.target?.result); // Guardar la imagen como una URL base64 para previsualización
+            setSelectedImage(event.target?.result as string); // Guardar la imagen como una URL base64 para previsualización
           };
           onChange(file); // Guardar el archivo de imagen para enviarlo al backend
           reader.readAsDataURL(file); // Leer el archivo

@@ -2,10 +2,9 @@
 
 import ImageUploader from "@/components/ImageUploader";
 import useImageModel from "@/hooks/useImageModel";
-import { useState } from "react";
 
 export default function Home() {
-  const { predictFromFile, error, isLoading, prediction } = useImageModel();
+  const { predictFromFile, isLoading, prediction } = useImageModel();
 
   const handlePredict = (img: File) => {
     predictFromFile(img);
